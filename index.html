@@ -189,7 +189,7 @@ function parseCodeText(text) {
     }
 
     // 공백 제거 (예: IQ 7316 -> IQ7316)
-    return result.replace(/\s+/g, '');
+    return result.replace(/\s+/g, '').toUpperCase();
 }
 </script>
 </body>
