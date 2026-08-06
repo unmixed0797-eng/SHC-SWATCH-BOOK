@@ -131,7 +131,7 @@ function startMic() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) { alert('구글 크롬(Chrome) 브라우저를 사용해 주세요.'); return; }
     const rec = new SR();
-    rec.lang = 'ko-KR';
+    rec.lang = 'en-US';
     rec.onresult = e => {
         document.getElementById('searchInput').value = e.results[0][0].transcript;
         doSearch();
