@@ -128,15 +128,68 @@ document.getElementById('searchInput').addEventListener('keydown', e => {
 });
 
 function startMic() {
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SR) { alert('구글 크롬(Chrome) 브라우저를 사용해 주세요.'); return; }
-    const rec = new SR();
-    rec.lang = 'en-US';
-    rec.onresult = e => {
-        document.getElementById('searchInput').value = e.results[0][0].transcript;
-        doSearch();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        alert("현재 브라우저는 음성 인식을 지원하지 않습니다.");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    // 한국어 인식 설정
+    recognition.lang = 'ko-KR';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onstart = () => {
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn) micBtn.textContent = "🎙️ 듣는 중...";
     };
-    rec.start();
+
+    recognition.onresult = (event) => {
+        let transcript = event.results[0][0].transcript;
+        
+        // 한글 발음을 영문/숫자 코드 형태로 자동 변환
+        const convertedText = parseCodeText(transcript);
+
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.value = convertedText;
+            doSearch(); // 기존 검색 함수 호출
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error("음성 인식 오류:", event.error);
+    };
+
+    recognition.onend = () => {
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn) micBtn.textContent = "음성인식";
+    };
+}
+
+// [신규 추가] 한글 발음을 영문 알파벳/숫자 조합으로 정제하는 함수
+function parseCodeText(text) {
+    let result = text.trim();
+
+    const alphaMap = {
+        '아이': 'I', '엑스': 'X', '큐': 'Q', '케이': 'K', '에이': 'A',
+        '비': 'B', '씨': 'C', '디': 'D', '이': 'E', '에프': 'F',
+        '지': 'G', '에이치': 'H', '제이': 'J', '엘': 'L', '엠': 'M',
+        '엔': 'N', '오': 'O', '피': 'P', '알': 'R', '에스': 'S',
+        '티': 'T', '유': 'U', '브이': 'V', '더블유': 'W', '와이': 'Y', '제트': 'Z'
+    };
+
+    for (let kor in alphaMap) {
+        result = result.replace(new RegExp(kor, 'g'), alphaMap[kor]);
+    }
+
+    // 공백 제거 (예: IQ 7316 -> IQ7316)
+    return result.replace(/\s+/g, '');
 }
 </script>
 </body>
