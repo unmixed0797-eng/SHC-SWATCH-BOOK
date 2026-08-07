@@ -8,5 +8,19 @@
   "short_name": "스와치북",
   "start_url": "/SHC-SWATCH-BOOK/",
   "theme_color": "#ffffff",
-  "description": "스와치북 위치 안내"
+  "description": "스와치북 위치 안내",
+  "icons": [
+    {
+      "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
