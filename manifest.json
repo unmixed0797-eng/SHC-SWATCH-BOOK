@@ -4,7 +4,7 @@
   "display": "standalone",
   "name": "스와치북",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/SHC-SWATCH-BOOK/",
   "short_name": "스와치북",
   "start_url": "/SHC-SWATCH-BOOK/",
   "theme_color": "#ffffff",
@@ -13,14 +13,12 @@
     {
       "src": "https://unmixed0797-eng.github.io/SHC-SWATCH-BOOK/icon.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "https://unmixed0797-eng.github.io/SHC-SWATCH-BOOK/icon.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     }
   ]
 }
