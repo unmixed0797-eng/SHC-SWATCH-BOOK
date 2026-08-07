@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "스와치북",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "스와치북",
+  "start_url": "/SHC-SWATCH-BOOK/",
+  "theme_color": "#ffffff",
+  "description": "스와치북 위치 안내"
+}
